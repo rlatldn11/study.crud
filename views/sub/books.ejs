@@ -1,0 +1,123 @@
+<h1 class="text-center">도서목록<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModalCenter">도서목록
+      </button></h1>
+<div class="accordion" id="accordionExample">
+    <% for(var i=0; i< data.length; i++){ %>
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<%= data[i].booksNo%>" aria-expanded="true" >
+            <%=data[i].bookName%>
+          </button>
+        </h2>
+      </div>
+  
+      <div id="collapse<%= data[i].booksNo%>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+            <div class="row text-center">
+                <div class="col">
+                    <%= data[i].bookName%>
+                </div>
+
+                <div class="col">
+                      <%= data[i].booksQty%>
+                </div>
+
+                <div class="col">
+                       <%= data[i].booksPrice%>
+                </div>
+                <div class="col">
+                        <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#modify<%= data[i].booksNo%>">수정
+                            </button>
+                 </div>
+                 <div class="col">
+                        <a href="/books/siwoowifi/<%= data[i].booksNo%>"class="btn btn-danger">삭제</a>
+                            </button>
+                 </div>
+        </div>
+      </div>
+    </div>
+     <!-- Modal -->
+     <div class="modal fade" id="modify<%= data[i].booksNo%>"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">도서 추가</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                        <form action="/books/modify" method="POST">
+                            <input type="hidden" name="booksNo" value="<%=data[i].booksNo%>">
+                                <div class="form-group">
+                                  <label for="bookName">도서명</label>
+                                  <input type="text" class="form-control" name="bookName" id="bookName" aria-describedby="emailHelp" placeholder="도서명">
+                                </div>
+                                <div class="form-group">
+                                  <label for="bookQty">재고량</label>
+                                  <input type="text" class="form-control" name="booksQty" id="booksQty" aria-describedby="emailHelp" placeholder="재고량">
+                                </div>
+                                <div class="form-group">
+                                        <label for="bookPrice">가격</label>
+                                        <input type="text" class="form-control" name="booksPrice" id="booksPrice" aria-describedby="emailHelp" placeholder="가격">
+                                </div>
+                                <div class="form-group">
+                                        <label for="bookImg">사진 주소</label>
+                                        <input type="text" class="form-control" name="booksImg" id="booksImg" aria-describedby="emailHelp" placeholder="사진 주소">
+                                </div>
+                                <button type="submit" class="btn btn-primary">등록하기</button>
+                              </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+
+
+
+
+
+    <% } %>
+  </div>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">도서 추가</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <form action="/books/addBook" method="POST">
+                            <div class="form-group">
+                              <label for="bookName">도서명</label>
+                              <input type="text" class="form-control" name="bookName" id="bookName" aria-describedby="emailHelp" placeholder="도서명">
+                            </div>
+                            <div class="form-group">
+                              <label for="bookQty">재고량</label>
+                              <input type="text" class="form-control" name="bookQty" id="bookQty" aria-describedby="emailHelp" placeholder="재고량">
+                            </div>
+                            <div class="form-group">
+                                    <label for="bookPrice">가격</label>
+                                    <input type="text" class="form-control" name="bookPrice" id="bookPrice" aria-describedby="emailHelp" placeholder="가격">
+                            </div>
+                            <div class="form-group">
+                                    <label for="bookImg">사진 주소</label>
+                                    <input type="text" class="form-control" name="bookImg" id="bookImg" aria-describedby="emailHelp" placeholder="사진 주소">
+                            </div>
+                            <button type="submit" class="btn btn-primary">등록하기</button>
+                          </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
